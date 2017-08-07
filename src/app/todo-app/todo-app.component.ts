@@ -8,7 +8,8 @@ import { TodoService } from '../todo.service';
 @Component({
   selector: 'app-todo-app',
   templateUrl: './todo-app.component.html',
-  styleUrls: ['./todo-app.component.css']
+  styleUrls: ['./todo-app.component.css'],
+  host: {'class': 'todoapp'}
 })
 export class TodoAppComponent implements OnInit {
   todos: Array<Todo> = [];

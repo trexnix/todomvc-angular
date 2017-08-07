@@ -1,0 +1,35 @@
+<header class="header">
+  <h1>todos</h1>
+  <input class="new-todo" required placeholder="What needs to be done?" autofocus>
+</header>
+
+<section class="main">
+  <input class="toggle-all" id="toggle-all" type="checkbox">
+  <label for="toggle-all">Mark all as complete</label>
+  <ul class="todo-list">
+    <li *ngFor="let todo of todos" [class.completed]="todo.done" [class.editing]="todo.editing">
+      <div class="view">
+        <input class="toggle" type="checkbox" [checked]="todo.done">
+        <label>{{todo.title}}</label>
+        <button class="destroy"></button>
+      </div>
+      <input type="text" class="edit" [value]="todo.title">
+    </li>
+  </ul>
+</section>
+
+<footer class="footer">
+  <span class="todo-count"><strong>1</strong> items left</span>
+  <ul class="filters">
+    <li>
+      <a>All</a>
+    </li>
+    <li>
+      <a>Active</a>
+    </li>
+    <li>
+      <a>Completed</a>
+    </li>
+  </ul>
+  <button class="clear-completed">Clear completed</button>
+</footer>

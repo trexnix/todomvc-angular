@@ -56,17 +56,26 @@ describe('TodoAppComponent', () => {
     activatedRoute.testParamMap = {};
     fixture.detectChanges();
     expect(component.todos.length).toEqual(3);
+    expect(compiled.textContent).toContain('first todo');
+    expect(compiled.textContent).toContain('second todo');
+    expect(compiled.textContent).toContain('third todo');
   });
 
   it('/todos/active should list active todos only', () => {
     activatedRoute.testParamMap = {type: 'active'};
     fixture.detectChanges();
     expect(component.todos.length).toEqual(1);
+    expect(compiled.textContent).not.toContain('first todo');
+    expect(compiled.textContent).toContain('second todo');
+    expect(compiled.textContent).not.toContain('third todo');
   });
 
   it('/todos/completed should list completed todos only', () => {
     activatedRoute.testParamMap = {type: 'completed'};
     fixture.detectChanges();
     expect(component.todos.length).toEqual(2);
+    expect(compiled.textContent).toContain('first todo');
+    expect(compiled.textContent).not.toContain('second todo');
+    expect(compiled.textContent).toContain('third todo');
   });
 });
