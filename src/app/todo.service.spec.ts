@@ -24,14 +24,16 @@ describe('TodoService', () => {
     expect(service.getAll()[0].title).toEqual('new todo');
   });
 
-  it('should list latest todos first', (done: DoneFn) => {
+  it('should list latest todos first', () => {
+    jasmine.clock().install();
+    let baseTime = new Date();
+    jasmine.clock().mockDate(baseTime);
     service.create('first todo');
-    setTimeout(() => {
-      service.create('second todo');
-      expect(service.getAll().length).toEqual(2);
-      expect(service.getAll()[0].title).toEqual('second todo');
-      done();
-    }, 1000)
+    jasmine.clock().tick(10);
+    service.create('second todo');
+    expect(service.getAll().length).toEqual(2);
+    expect(service.getAll()[0].title).toEqual('second todo');
+    jasmine.clock().uninstall();
   });
 
   it('#getActive should list active todos only', () => {
