@@ -22,13 +22,14 @@
   <span class="todo-count"><strong>{{getActiveItems().length}}</strong> items left</span>
   <ul class="filters">
     <li>
-      <a>All</a>
+      <a routerLink="/todos" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:
+true}">All</a>
     </li>
     <li>
-      <a>Active</a>
+      <a routerLink="/todos/active" routerLinkActive="selected">Active</a>
     </li>
     <li>
-      <a>Completed</a>
+      <a routerLink="/todos/completed" routerLinkActive="selected">Completed</a>
     </li>
   </ul>
   <button class="clear-completed" (click)="clearCompleted()">Clear completed</button>
