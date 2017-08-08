@@ -7,13 +7,13 @@
   <input class="toggle-all" id="toggle-all" type="checkbox" (click)="toggleAll()">
   <label for="toggle-all">Mark all as complete</label>
   <ul class="todo-list">
-    <li *ngFor="let todo of todos" [class.completed]="todo.done" [class.editing]="todo.editing">
+    <li #todoElement *ngFor="let todo of todos" [class.completed]="todo.done" [class.editing]="todo.editing">
       <div class="view">
         <input class="toggle" type="checkbox" [checked]="todo.done" (change)="toggleTodo(todo)">
-        <label>{{todo.title}}</label>
+        <label (dblclick)="todo.editing = true; setFocusOn(todoElement); ">{{todo.title}}</label>
         <button class="destroy" (click)="destroyTodo(todo)"></button>
       </div>
-      <input type="text" class="edit" [value]="todo.title">
+      <input type="text" class="edit" [value]="todo.title" (keyup.enter)="todo.editing = false;" (blur)="todo.editing = false; updateTodoTitle(todo, $event.target.value);" (keyup.esc)="$event.target.value = todo.title; todo.editing = false;">
     </li>
   </ul>
 </section>

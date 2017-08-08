@@ -149,4 +149,30 @@ describe('TodoAppComponent', () => {
       expect(todo.done).toBeFalsy();
     });
   })
+
+  it('blur input while editing should update todo title', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    const secondTodo = fixture.debugElement.queryAll(By.css('.todo-list li'))[1];
+    const secondTodoInput = secondTodo.query(By.css('.edit')).nativeElement;
+    secondTodoInput.value = 'update second todo';
+    secondTodoInput.dispatchEvent(new Event('blur'));
+    fixture.detectChanges();
+    expect(compiled.textContent).toContain('update second todo');
+    expect(component.todos[1].title).toEqual('update second todo');
+  })
+
+  it('pressing Esc key while editing should cancel the editing action', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    const secondTodo = fixture.debugElement.queryAll(By.css('.todo-list li'))[1];
+    const secondTodoInput = secondTodo.query(By.css('.edit')).nativeElement;
+    secondTodoInput.value = 'updated title';
+    secondTodoInput.dispatchEvent(new KeyboardEvent('keyup', {'key': 'Escape'}));
+    fixture.detectChanges();
+    expect(component.todos[1].title).toEqual('second todo');
+    expect(secondTodoInput.value).toEqual('second todo');
+    expect(compiled.textContent).toContain('second todo');
+    expect(compiled.textContent).not.toContain('updated todo');
+  })
 });

@@ -75,4 +75,12 @@ export class TodoAppComponent implements OnInit {
   clearCompleted(): void {
     this.todoService.clearCompleted();
   }
+
+  setFocusOn(el) {
+    setTimeout(() => el.querySelector('.edit').focus(), 0);
+  }
+
+  updateTodoTitle(todo: Todo, data: string) {
+    this.todoService.updateTitle(todo, data);
+  }
 }
