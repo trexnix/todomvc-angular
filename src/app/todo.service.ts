@@ -44,6 +44,12 @@ export class TodoService {
     this.source.next();
   }
 
+  toggleAll(): void {
+    let areAllSelected = this.todos.filter(todo => { return todo.done }).length == this.todos.length;
+    areAllSelected ? this.todos.forEach(todo => todo.done = false) : this.todos.forEach(todo => todo.done = true);
+    this.source.next();
+  }
+
   updateTitle(todo: Todo, text: string) {
     todo.title = text;
     this.source.next();

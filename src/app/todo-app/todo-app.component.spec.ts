@@ -134,4 +134,19 @@ describe('TodoAppComponent', () => {
     secondCheckbox.click();
     expect(component.todos[1].done).toBeFalsy();
   })
+
+  it('click the down arrow button to toggle all todos', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    const toggleAllBtn = fixture.debugElement.query(By.css('.toggle-all')).nativeElement;
+    toggleAllBtn.click();
+    component.todos.forEach((todo) => {
+      expect(todo.done).toBeTruthy();
+    });
+
+    toggleAllBtn.click();
+    component.todos.forEach((todo) => {
+      expect(todo.done).toBeFalsy();
+    });
+  })
 });

@@ -4,7 +4,7 @@
 </header>
 
 <section class="main">
-  <input class="toggle-all" id="toggle-all" type="checkbox">
+  <input class="toggle-all" id="toggle-all" type="checkbox" (click)="toggleAll()">
   <label for="toggle-all">Mark all as complete</label>
   <ul class="todo-list">
     <li *ngFor="let todo of todos" [class.completed]="todo.done" [class.editing]="todo.editing">
