@@ -12,26 +12,17 @@ describe('TodoAppComponent', () => {
   let activatedRoute: ActivatedRouteStub;
 
   beforeEach(async(() => {
-    let todoService = {
-      getAll() {
-        return [
+    class TodoServiceStub extends TodoService {
+      constructor() {
+        spyOn(localStorage, 'getItem').and.returnValue(JSON.stringify([
           {title: 'first todo', done: true, createdAt: 1},
           {title: 'second todo', done: false, createdAt: 2},
           {title: 'third todo', done: true, createdAt: 3}
-        ]
-      },
-      getActive() {
-        return [
-          {title: 'second todo', done: false, createdAt: 2},
-        ]
-      },
-      getCompleted() {
-        return [
-          {title: 'first todo', done: true, createdAt: 1},
-          {title: 'third todo', done: true, createdAt: 3}
-        ]
+        ]));
+        spyOn(localStorage, 'setItem');
+        super();
       }
-    };
+    }
 
     activatedRoute = new ActivatedRouteStub;
 
@@ -40,7 +31,7 @@ describe('TodoAppComponent', () => {
       providers: [
         {provide: Router, useClass: RouterStub},
         {provide: ActivatedRoute, useValue: activatedRoute},
-        {provide: TodoService, useValue: todoService},
+        {provide: TodoService, useClass: TodoServiceStub},
       ]
     })
     .compileComponents();
