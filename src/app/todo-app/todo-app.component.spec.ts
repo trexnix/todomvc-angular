@@ -118,4 +118,20 @@ describe('TodoAppComponent', () => {
     expect(compiled.textContent).not.toContain('first todo');
     expect(compiled.textContent).not.toContain('third todo');
   });
+
+  it('tick checkbox should mark/unmark a todo as done', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    const secondCheckbox = fixture.debugElement.queryAll(By.css('.toggle'))[1].nativeElement;
+    // dispatch a click event doesn't work here???
+    // secondCheckbox.dispatchEvent(new Event('click'));
+    secondCheckbox.click();
+    fixture.detectChanges();
+    expect(component.todos[1].done).toBeTruthy();
+    // and here also???
+    // secondCheckbox.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    secondCheckbox.click();
+    expect(component.todos[1].done).toBeFalsy();
+  })
 });

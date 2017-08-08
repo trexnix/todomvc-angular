@@ -64,6 +64,10 @@ export class TodoAppComponent implements OnInit {
     this.todoService.destroy(todo);
   }
 
+  toggleTodo(todo: Todo): void {
+    this.todoService.toggleDone(todo);
+  }
+
   clearCompleted(): void {
     this.todoService.clearCompleted();
   }

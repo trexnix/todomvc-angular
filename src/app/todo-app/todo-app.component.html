@@ -9,7 +9,7 @@
   <ul class="todo-list">
     <li *ngFor="let todo of todos" [class.completed]="todo.done" [class.editing]="todo.editing">
       <div class="view">
-        <input class="toggle" type="checkbox" [checked]="todo.done">
+        <input class="toggle" type="checkbox" [checked]="todo.done" (change)="toggleTodo(todo)">
         <label>{{todo.title}}</label>
         <button class="destroy" (click)="destroyTodo(todo)"></button>
       </div>
