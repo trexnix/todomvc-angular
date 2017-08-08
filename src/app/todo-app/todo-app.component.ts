@@ -59,4 +59,8 @@ export class TodoAppComponent implements OnInit {
     this.todoService.create(fieldInput.value);
     fieldInput.value = '';
   }
+
+  clearCompleted(): void {
+    this.todoService.clearCompleted();
+  }
 }

@@ -96,4 +96,15 @@ describe('TodoAppComponent', () => {
       expect(compiled.textContent).toContain('new todo');
     });
   }));
+
+  it('click Clear button should clear all completed todos', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    const clearBtn = fixture.debugElement.query(By.css('.clear-completed')).nativeElement;
+    clearBtn.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    expect(compiled.textContent).toContain('second todo');
+    expect(compiled.textContent).not.toContain('first todo');
+    expect(compiled.textContent).not.toContain('third todo');
+  });
 });

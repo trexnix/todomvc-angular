@@ -69,4 +69,20 @@ describe('TodoService', () => {
     service.destroy(todo);
     expect(service.getAll().length).toEqual(0);
   });
+
+  it('should clear completed todos', () => {
+    jasmine.clock().install();
+    let baseTime = new Date();
+    jasmine.clock().mockDate(baseTime);
+    service.create('first todo');
+    jasmine.clock().tick(10);
+    service.create('second todo');
+
+    // Mark the second todo as done
+    service.toggleDone(service.getAll()[0]);
+    service.clearCompleted();
+    expect(service.getAll().length).toEqual(1);
+    expect(service.getAll()[0].title).toEqual('first todo');
+    jasmine.clock().uninstall();
+  })
 });

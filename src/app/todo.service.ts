@@ -54,4 +54,9 @@ export class TodoService {
     if (index > -1) this.todos.splice(index, 1);
     this.source.next();
   }
+
+  clearCompleted() {
+    this.todos = this.todos.filter(todo => !todo.done);
+    this.source.next();
+  }
 }
