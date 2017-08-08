@@ -49,6 +49,10 @@ export class TodoAppComponent implements OnInit {
     return this.todoService[methodName]();
   }
 
+  getActiveItems(): Array<Todo> {
+    return this.todos.filter(item => !item.done);
+  }
+
   createTodo(fieldInput: any) {
     if (!fieldInput.value)
       return;

@@ -71,6 +71,12 @@ describe('TodoAppComponent', () => {
     expect(compiled.textContent).toContain('third todo');
   });
 
+  it('should show active items count', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    expect(compiled.textContent).toContain('1 items left');
+  });
+
   it('should create new todo', async(() => {
     activatedRoute.testParamMap = {};
     fixture.detectChanges();
