@@ -11,7 +11,7 @@
       <div class="view">
         <input class="toggle" type="checkbox" [checked]="todo.done">
         <label>{{todo.title}}</label>
-        <button class="destroy"></button>
+        <button class="destroy" (click)="destroyTodo(todo)"></button>
       </div>
       <input type="text" class="edit" [value]="todo.title">
     </li>

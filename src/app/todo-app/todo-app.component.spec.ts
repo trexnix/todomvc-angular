@@ -97,6 +97,17 @@ describe('TodoAppComponent', () => {
     });
   }));
 
+  it('click x button should destroy a todo', () => {
+    activatedRoute.testParamMap = {};
+    fixture.detectChanges();
+    const clearBtn = fixture.debugElement.queryAll(By.css('.destroy'))[1].nativeElement;
+    clearBtn.dispatchEvent(new Event('click'));
+    fixture.detectChanges();
+    expect(compiled.textContent).not.toContain('second todo');
+    expect(compiled.textContent).toContain('first todo');
+    expect(compiled.textContent).toContain('third todo');
+  });
+
   it('click Clear button should clear all completed todos', () => {
     activatedRoute.testParamMap = {};
     fixture.detectChanges();

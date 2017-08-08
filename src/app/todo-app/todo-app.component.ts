@@ -60,6 +60,10 @@ export class TodoAppComponent implements OnInit {
     fieldInput.value = '';
   }
 
+  destroyTodo(todo: Todo): void {
+    this.todoService.destroy(todo);
+  }
+
   clearCompleted(): void {
     this.todoService.clearCompleted();
   }
