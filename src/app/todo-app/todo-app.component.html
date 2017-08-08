@@ -1,6 +1,6 @@
 <header class="header">
   <h1>todos</h1>
-  <input class="new-todo" required placeholder="What needs to be done?" autofocus>
+  <input #f class="new-todo" (keyup.enter)="createTodo(f)" required placeholder="What needs to be done?" autofocus>
 </header>
 
 <section class="main">

@@ -16,6 +16,7 @@ export class TodoAppComponent implements OnInit {
   filterParam: string = '';
 
   paramSub: any;
+  todoSub: any;
 
   constructor(private todoService: TodoService,
               private router: Router,
@@ -29,6 +30,9 @@ export class TodoAppComponent implements OnInit {
         return this.getFilteredList(this.filterParam);
       })
       .subscribe((todo: Todo) => this.todos.push(todo));
+
+    this.todoSub = this.todoService.source
+      .subscribe(() => this.todos = this.getFilteredList(this.filterParam));
   }
 
   ngOnDestroy() {
@@ -45,4 +49,10 @@ export class TodoAppComponent implements OnInit {
     return this.todoService[methodName]();
   }
 
+  createTodo(fieldInput: any) {
+    if (!fieldInput.value)
+      return;
+    this.todoService.create(fieldInput.value);
+    fieldInput.value = '';
+  }
 }
